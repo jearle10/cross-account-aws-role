@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: Grant permissions for a IAM user to assume a role in any account
+Resources:
+  crossAccountRole:
+    Type: 'AWS::IAM::Policy'
+    Properties:
+      PolicyName: "cross-account-permissions"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "sts:AssumeRole"
+            Resource: 'arn:aws:iam::*:role/*'
+      Groups:
+        - "admin"

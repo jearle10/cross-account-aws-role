@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Create a cross account role with admin permissions
+
+Parameters:
+  externalAccount:
+    Type: String
+    Default: ""
+    Description: The arn of the root user from the external account
+
+Resources:
+  CrossAccountRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Effect: "Allow"
+          Principal:
+            AWS: !Ref externalAccount
+          Action: "sts:AssumeRole"
+
+      Description: Allow users within a different trusted account to assume the admin role within this account
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      MaxSessionDuration: 3600
+      RoleName: cross-account-admin

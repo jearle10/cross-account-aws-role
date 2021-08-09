@@ -1,0 +1,6 @@
+[
+  {
+    "ParameterKey": "externalAccount",
+    "ParameterValue": "arn:aws:iam::<account_number>:root"
+  }
+]
